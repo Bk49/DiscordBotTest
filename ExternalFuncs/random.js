@@ -11,5 +11,8 @@ module.exports = {
     getColor(){
         const colorAry = ['#E74C3C','#9B59B6','#5DADE2','#2ECC71','#F4D03F','#E67E22','#F0F3F4','#99A3A4']
         return colorAry[Math.floor(Math.random()*colorAry.length)]
+    },
+    getMoney(min, max){
+        return min + Math.round(Math.random()*(max-min))
     }
 }

@@ -1,4 +1,3 @@
-const { DiscordAPIError } = require("discord.js");
 const RANDOM = require("../ExternalFuncs/random")
 const Discord = require("discord.js")
 const {PREFIX} = require('../config.json')
@@ -8,7 +7,7 @@ module.exports = {
     description: 'Obtain a message embed containing avatar',
     args: true,
     usage: '<user>',
-    guildOnly: true,
+    guildOnly: false,
     aliases:['icon','pfp'],
 	execute(message, args) {
     	RANDOM.getQuotePromise().then(data => {
@@ -40,7 +39,7 @@ module.exports = {
                 .addField("Quote for you", QUOTE)
                 .setColor(COLORHEX)
                 .setThumbnail(message.client.user.avatarURL())
-                .setImage(user.avatarURL())
+                .setImage(user.avatarURL({format: 'png', dynamic: true, size:1024}))
                 .setFooter('Quote by Forismatic')
             }
 

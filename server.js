@@ -59,8 +59,16 @@ client.on('message', msg => {
         const expirationTime = timestamps.get(msg.author.id) + cooldownAmount
         
         if(now < expirationTime){
-            const timeLeft = (expirationTime - now) / 1000;
-            return msg.reply(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command`)
+            const timeLeft = Math.round((expirationTime - now) / 1000); // in seconds
+            const seconds = timeLeft % 60
+            const minutes = ((timeLeft-seconds) % 3600) / 60
+            const hours = Math.trunc(timeLeft / 3600)
+
+            let reply = `The command \`${commandName}\` is on cooldown for `
+            if(hours > 0) reply += hours+'h '
+            if(minutes > 0) reply += minutes+ 'm '
+            if(seconds > 0) reply += seconds+ 's '
+            return msg.reply(reply)
         }
     }
 
