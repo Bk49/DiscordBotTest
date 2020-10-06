@@ -1,9 +1,10 @@
 'use-strict'
+require('dotenv').config()
 
 const fs = require('fs')
 const Discord = require("discord.js")
 const client = new Discord.Client();
-const { PREFIX, TOKEN } = require('./config.json');
+const { PREFIX } = require('./config.json');
 
 // Linking commands to a separate file
 client.commands = new Discord.Collection();
@@ -84,4 +85,4 @@ client.on('message', msg => {
     }
 });
 
-client.login(TOKEN);
+client.login(process.env.TOKEN);
